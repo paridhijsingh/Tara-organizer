@@ -69,3 +69,11 @@ Format for every entry: **Date**, **What**, **Why**, **When**, **Log**.
 - **Why:** Step 1 in Tara's plan — today's calendar is the first piece of the morning briefing
 - **When:** Phase 1, Step 1
 - **Log:** python calendar_client.py ran with no error, printed no events — today is empty in Google Calendar. token.json saved (762 bytes), gitignored, not in git status. Fixed a missing ZoneInfo import along the way.
+
+### 2026-11-21 — Gmail Step 2 done, "important" v2
+
+- **Date:** 2026-11-21
+- **What:** Created gmail_client.py with get_important_unread() — read-only, gmail.readonly scope only, with is_important() filter
+- **Why:** Step 2 in Tara's plan — important unread Gmail is the second piece of the morning briefing
+- **When:** Phase 1, Step 2
+- **Log:** First run returned 10 unread, all noise. Filter v1 matched CareerConnects job alerts ("APPLICATIONS NEEDED", "Hiring now") — false positives. Filter v2 added EXCLUDE_WORDS (job alert, applications needed, hiring now, position is vacant, job feed) — second run printed nothing, correctly. "Important" is a living definition, we will keep refining it.
