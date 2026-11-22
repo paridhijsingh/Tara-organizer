@@ -77,3 +77,10 @@ Format for every entry: **Date**, **What**, **Why**, **When**, **Log**.
 - **Why:** Step 2 in Tara's plan — important unread Gmail is the second piece of the morning briefing
 - **When:** Phase 1, Step 2
 - **Log:** First run returned 10 unread, all noise. Filter v1 matched CareerConnects job alerts ("APPLICATIONS NEEDED", "Hiring now") — false positives. Filter v2 added EXCLUDE_WORDS (job alert, applications needed, hiring now, position is vacant, job feed) — second run printed nothing, correctly. "Important" is a living definition, we will keep refining it.
+
+## 2026-11-22 — Step 3: Briefing done
+
+- **What:** Added deadlines.py (hand-edited list: Vastra judging Dec 1, FinPath results Dec 10, HPE screening Dec 24), briefing.py (build_briefing), main.py (python main.py prints the briefing), test_briefing.py (3 tests).
+- **Why:** The briefing is Tara's one job in Phase 1 — calendar + important Gmail + deadlines in one morning message.
+- **When:** Nov 22, 2026.
+- **Log:** Live run printed no events, 1 important mail (Chrisnotes), 3 deadlines. First run had 2 false positives (MJH job alert, Carnival sale) — filter v3 added "must hire", "myjobhelper", "cyber sale", "early access", "carnival" to EXCLUDE_WORDS, Chrisnotes kept on purpose. pytest -q: 3 passed.
