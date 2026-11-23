@@ -131,3 +131,13 @@ Format for every entry: **Date**, **What**, **Why**, **When**, **Log**.
 - **Why:** Repo root had loads of files; folders make it easier to find code, docs, scripts, and tests
 - **When:** Phase 2
 - **Log:** Verified: `python src/main.py` prints briefing, `pytest tests/ -q`: 6 passed, `list_labels` + `propose_categories` work from `scripts/`. Cron updated to `src/send_briefing.py` at 8am, old cron line deleted
+
+---
+
+### 2026-11-22 — Docs synced to current repo
+
+- **Date:** 2026-11-22
+- **What:** Updated `docs/PLAN.md`, `SKILL.md`, `RULES.md`, `MANUAL.md`, and root `README.md` to match folder layout, built features, and scopes (`calendar.readonly`, `gmail.readonly`, `gmail.send`, `gmail.modify`)
+- **Why:** Docs still pointed at root paths, said Phase 1 files were “not built,” and claimed read-only-only scopes after Phase 2 send/modify shipped
+- **When:** Phase 2
+- **Log:** Paths now use `src/`, `scripts/`, `docs/`, `tests/`. RULES softened to “one feature at a time” (still 15 rules). MANUAL chapters use current run commands. No feature code changed

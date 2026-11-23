@@ -4,21 +4,25 @@
 
 ## What Tara does
 
-**Phase 1**
+**Phase 1** (done)
 - **Today's calendar** — read-only, Google Calendar
-- **Important unread Gmail** — read-only, Gmail, no specific-sender list
-- **Top deadlines** — hand-edited list, next 7 days
-- **Morning briefing** — `python main.py`
+- **Important unread Gmail** — read-only filter, no specific-sender list
+- **Top deadlines** — hand-edited list
+- **Morning briefing** — `python src/main.py`
+
+**Phase 2** (in progress, approval every time)
+- Morning briefing by email (cron at 8am)
+- Gmail categorizing (propose → approve → apply)
+- Reducing unused Gmail labels
+- Later: suspicious mail to Spam after review, bookmarks, desktop tidy
 
 ## What Tara does NOT do
 
-**Phase 1**
-- No sending, replying, archiving, labelling, or deleting mail
+- No work Gmail — personal only (`paridhijaysingh@gmail.com`)
 - No creating, editing, or deleting calendar events
 - No auto-archiving, ever
-- Personal Gmail only — no work Gmail
-
-**Phase 2** (with approval every time): Gmail cleaning and categorizing, suspicious mail to Spam after review, reducing Gmail folders, organizing bookmarks, and desktop tidy with suggestions.
+- No silent labelling, label deletes, or spam moves — Paridhi approves each batch
+- Sends only to Paridhi, via the approved morning path
 
 ## Setup
 
@@ -28,33 +32,43 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-Then create a Google Cloud project, enable **Gmail API** and **Google Calendar API**, create an OAuth client (Desktop app), and download `credentials.json` into this folder.
+Then create a Google Cloud project, enable **Gmail API** and **Google Calendar API**, create an OAuth client (Desktop app), and download `credentials.json` into the **repo root**.
 
-`credentials.json` is gitignored — never commit it.
+`credentials.json` and `token.json` are gitignored — never commit them.
 
 ## Usage
 
 ```bash
-python calendar_client.py   # Step 1 — today's events, read-only
-python main.py              # morning briefing — once all of Phase 1 is done
+python src/main.py                      # morning briefing (print)
+python src/send_briefing.py             # email briefing to Paridhi
+python src/calendar_client.py           # today's events only
+python scripts/propose_categories.py    # category suggestions — moves nothing
+python scripts/list_labels.py           # list Gmail labels — changes nothing
+pytest tests/ -q                        # 6 tests, no Google calls
 ```
 
 ## Files
 
-| File | Role |
+| Path | Role |
 |------|------|
-| `PLAN.md` | Full plan, Phase 0–7 |
-| `SKILL.md` | How Tara works |
-| `RULES.md` | 15 standing rules |
-| `CHANGELOG.md` | Every change — Date / What / Why / When / Log |
-| `calendar_client.py` | `get_today_events()` |
-| `gmail_client.py` | `get_important_unread()` |
-| `briefing.py` | `build_briefing(events, emails, deadlines)` |
-| `deadlines.py` | Hand-edited deadlines list |
-| `test_briefing.py` | Tests — no Google calls needed |
+| `docs/PLAN.md` | Full plan, Phase 0–7 |
+| `docs/SKILL.md` | How Tara works |
+| `docs/RULES.md` | 15 standing rules |
+| `docs/CHANGELOG.md` | Every change — Date / What / Why / When / Log |
+| `docs/MANUAL.md` | Textbook — one chapter per feature |
+| `src/auth.py` | Shared OAuth — `get_credentials()` |
+| `src/calendar_client.py` | `get_today_events()` |
+| `src/gmail_client.py` | `get_important_unread()` |
+| `src/deadlines.py` | Hand-edited deadlines |
+| `src/briefing.py` | `build_briefing(...)` |
+| `src/categorize.py` | `suggest_category(...)` |
+| `src/main.py` | Print morning briefing |
+| `src/send_briefing.py` | Email morning briefing |
+| `scripts/` | Propose / apply categories, list / clean labels |
+| `tests/` | `test_briefing.py`, `test_categorize.py` |
 
 ## Rules
 
-Plan first, one feature at a time, read-only first, nothing sends without approval, no secrets in git, log every change.
+Plan first, one feature at a time, Phase 1 read-first, nothing sends or changes mail without approval, no secrets in git, log every change.
 
-See [RULES.md](RULES.md).
+See [docs/RULES.md](docs/RULES.md).
