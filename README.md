@@ -47,6 +47,16 @@ python scripts/list_labels.py           # list Gmail labels — changes nothing
 pytest tests/ -q                        # 6 tests, no Google calls
 ```
 
+**Approval-gated only** (run after Paridhi approves that batch): `scripts/apply_categories.py`, `scripts/clean_applications_labels.py`, `scripts/clean_substacks_labels.py`.
+
+**Cron** (8am daily, already set on Paridhi’s Mac):
+
+```bash
+0 8 * * * cd /Users/paridhi/tara-organizer && /Users/paridhi/tara-organizer/.venv/bin/python src/send_briefing.py >> /Users/paridhi/tara-organizer/tara.log 2>&1
+```
+
+Scopes in use: `calendar.readonly`, `gmail.readonly`, `gmail.send`, `gmail.modify`.
+
 ## Files
 
 | Path | Role |

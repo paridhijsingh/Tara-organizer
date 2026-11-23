@@ -141,3 +141,13 @@ Format for every entry: **Date**, **What**, **Why**, **When**, **Log**.
 - **Why:** Docs still pointed at root paths, said Phase 1 files were “not built,” and claimed read-only-only scopes after Phase 2 send/modify shipped
 - **When:** Phase 2
 - **Log:** Paths now use `src/`, `scripts/`, `docs/`, `tests/`. RULES softened to “one feature at a time” (still 15 rules). MANUAL chapters use current run commands. No feature code changed
+
+---
+
+### 2026-11-22 — README: cron + approval-gated scripts
+
+- **Date:** 2026-11-22
+- **What:** Added cron line, approval-gated script note, and scopes line to `README.md`
+- **Why:** Close the last small gaps so the README matches live setup
+- **When:** Phase 2
+- **Log:** Docs only — no feature code changed
