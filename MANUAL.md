@@ -7,12 +7,15 @@ Tara's textbook — one chapter per feature, in plain language.
 ## Chapter 1 — Auth (shared sign-in)
 
 ### What it is
+
 One shared sign-in for Tara, in `auth.py`, so Calendar and Gmail both use the same token.
 
 ### Why it exists
+
 Tara needs to read Google Calendar and Gmail, read-only, without signing in twice.
 
 ### How it works
+
 1. **Input:** Local `credentials.json` (OAuth Desktop client) and, if present, `token.json`.
 2. **Steps:** `get_credentials()` in `auth.py`:
    - If `token.json` exists, load it.
@@ -22,14 +25,17 @@ Tara needs to read Google Calendar and Gmail, read-only, without signing in twic
 4. **Scopes (read-only only):** `calendar.readonly` and `gmail.readonly`.
 
 ### What it does NOT do
+
 - Never sends, deletes, or moves mail
 - Never creates or edits events
 - Never commits `credentials.json` or `token.json` — both are gitignored
 
 ### How to test it
+
 Run `python calendar_client.py` — it should open the browser once, then save `token.json` and run with no error.
 
 ### What changed, and when
+
 See [CHANGELOG.md](CHANGELOG.md) — **2026-11-21, Step 2:** moved the sign-in out of `calendar_client.py` into shared `auth.py`, added the Gmail scope, re-authorized once. (Related: Gmail Step 2 entry.)
 
 ---
@@ -37,12 +43,15 @@ See [CHANGELOG.md](CHANGELOG.md) — **2026-11-21, Step 2:** moved the sign-in o
 ## Chapter 2 — Calendar: today's events
 
 ### What it is
+
 `get_today_events()` in `calendar_client.py` — returns today's calendar events.
 
 ### Why it exists
+
 Today's calendar is the first piece of the morning briefing.
 
 ### How it works
+
 1. **Input:** Credentials from `get_credentials()` in `auth.py`.
 2. **Steps:** In `calendar_client.py` → `get_today_events()`:
    - Build the Calendar service with `get_credentials()`.
@@ -51,12 +60,15 @@ Today's calendar is the first piece of the morning briefing.
 3. **Output:** A list of `{time, title, attendees}`. All-day events show the date instead of a time.
 
 ### What it does NOT do
+
 Read-only only. Never creates, edits, or deletes an event.
 
 ### How to test it
+
 Run `python calendar_client.py` — it should print today's events, or nothing if today is empty. On Nov 21 it printed nothing, correctly, because today was empty.
 
 ### What changed, and when
+
 See [CHANGELOG.md](CHANGELOG.md) — **2026-11-21, Step 1:** first feature built, fixed a missing `ZoneInfo` import along the way. (Entry: Calendar Step 1 done.)
 
 ---
@@ -64,12 +76,15 @@ See [CHANGELOG.md](CHANGELOG.md) — **2026-11-21, Step 1:** first feature built
 ## Chapter 3 — Gmail: important unread mail
 
 ### What it is
+
 `get_important_unread()` in `gmail_client.py` — returns important unread mail.
 
 ### Why it exists
+
 Important unread Gmail is the second piece of the morning briefing — but only the important mail, not every unread mail.
 
 ### How it works
+
 1. **Input:** Credentials from `get_credentials()` in `auth.py`.
 2. **Steps:** In `gmail_client.py` → `get_important_unread()`:
    - Build the Gmail service with `get_credentials()`.
@@ -81,12 +96,15 @@ Important unread Gmail is the second piece of the morning briefing — but only 
 **What "important" means:** Mail about companies she applies to (application / interview / recruiter / screening / offer / hiring), **plus** Substacks, TLDR, and the tech newsletters she subscribes to. Job alerts / job feeds, promotions, and sales are **not** important. "Important" is a living definition — we keep refining it as Tara runs.
 
 ### What it does NOT do
+
 Read-only only. No specific-sender list, no archiving, no labelling, no moving mail, no auto-archiving ever.
 
 ### How to test it
+
 Run `python gmail_client.py` — first run returned 10 unread, all noise. Filter v1 matched CareerConnects job alerts ("APPLICATIONS NEEDED", "Hiring now") — false positives. Filter v2 added `EXCLUDE_WORDS` (job alert, applications needed, hiring now, position is vacant, job feed) — second run printed nothing, correctly.
 
 ### What changed, and when
+
 See [CHANGELOG.md](CHANGELOG.md) — **2026-11-21, Step 2:** first version, then v2 filter fix. (Entry: Gmail Step 2 done, "important" v2.)
 
 ---
@@ -95,12 +113,27 @@ See [CHANGELOG.md](CHANGELOG.md) — **2026-11-21, Step 2:** first version, then
 
 ### What it is
 
+build_briefing() in briefing.py — turns today's calendar, important unread Gmail, and top deadlines into one morning briefing. main.py runs it all with python main.py.
+
 ### Why it exists
+
+The briefing is Tara's one job in Phase 1 — one clear message in the morning, instead of checking three places yourself.
 
 ### How it works
 
+1. Input: events from get_today_events(), emails from get_important_unread(), deadlines from get_deadlines().
+2. Steps: main.py calls all three, hands them to build_briefing(), which writes three sections — Today's calendar, Important unread mail, Top deadlines — with one line per event / email / deadline.
+3. Output: One printed string, starting "Good morning, Paridhi — here's your day with Tara."
+
 ### What it does NOT do
+
+Read-only only. It never sends, deletes, or moves mail, never creates or edits events, and never adds deadlines by itself — deadlines.py is hand-edited by Paridhi.
 
 ### How to test it
 
+Run pytest -q — 3 tests pass: empty day, one event + one email, deadlines show up.
+Run python main.py live — on Nov 22 it printed no events, one important mail (Chrisnotes, kept on purpose), and three deadlines. Filter v3 fixed two false positives first: MJH job alert ("must hire") and Carnival Cyber Sale.
+
 ### What changed, and when
+
+See CHANGELOG.md — 2026-11-22, Step 3: deadlines.py, briefing.py, main.py, test_briefing.py added; Gmail filter v3.
