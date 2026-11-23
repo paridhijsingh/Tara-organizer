@@ -98,3 +98,10 @@ Format for every entry: **Date**, **What**, **Why**, **When**, **Log**.
 - **Why:** Gmail had ~200 labels; Tara proposes categories and helps decide which labels to combine and clean, with Paridhi approving each batch.
 - **When:** Nov 22, 2026.
 - **Log:** pytest -q: 6 passed. Live propose run: Daily Dose + Chrisnotes Important, Carnival + Algo Monster Promotions. Deleted, approved: Applications/FAFSA, Applications/Santa Barbara, Applications/Indian Universities, Applications/CSS Profile, Applications/University of California. Parent Applications kept, mail never deleted, Job Applications and Substacks untouched.
+
+## 2026-11-22 — Phase 2: Gmail categorizing, first approved move
+
+- **What:** Added apply_categories.py. Applied the approved batch of 10 unread mails.
+- **Why:** Tara proposes first, Paridhi approves, then Tara moves only the approved mail.
+- **When:** Nov 22, 2026.
+- **Log:** Moved 8: Carnival + Algo Monster to Promotions; OpenRouter, Chris Ching, Apollo, WallStreetQuants, CareerCircle, MJH to Updates. Left alone: Daily Dose + Chrisnotes (Important). Nothing deleted, archived, or marked read.
