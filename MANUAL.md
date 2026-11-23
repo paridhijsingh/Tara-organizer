@@ -166,3 +166,32 @@ Run python send_briefing.py by hand once — on Nov 22 it landed in the inbox at
 ### What changed, and when
 
 See CHANGELOG.md — 2026-11-22, Phase 2: added gmail.send to auth.py scopes, re-authorized once, added send_briefing.py, added the 8am cron job. Filter v4 excluded AlgoMonster ("black friday", "blowout", "% off", "algo monster").
+
+## Chapter 6 — Gmail categorizing and label cleaning
+
+### What it is
+
+categorize.py suggests a category for a mail (Promotions, Social, Updates, Important). propose_categories.py shows those suggestions for up to 10 unread mails. list_labels.py lists all Gmail labels. clean_applications_labels.py deletes only the labels Paridhi approved.
+
+### Why it exists
+
+Gmail had about 200 labels, and unread mail was a mix of important mail, promotions, and job alerts. Tara helps decide what each mail is, and which labels to combine and clean, so the inbox stays tidy.
+
+### How it works
+
+1. Input: sender + subject + snippet for each unread mail, and the full label list from Gmail.
+2. Steps: suggest_category() checks important words first (application, interview, recruiter, substack, tldr, tech, daily dose), then promotions words (sale, discount, % off), then social words, then falls back to Updates. Exclude words (job alert, must hire, cyber sale, black friday, algo monster) stop a mail being called Important.
+3. Output: propose_categories.py prints [Category] sender: subject for each mail. list_labels.py prints name — type (id) for each label.
+4. Labels: Paridhi approved deleting 5 old college Applications sub-labels only. clean_applications_labels.py deletes them by exact label ID.
+
+### What it does NOT do
+
+Proposing moves nothing. Deleting a label never deletes mail — mail stays in All Mail / Inbox. Tara never moves mail or deletes a label without Paridhi approving that exact batch first. Job Applications and Substacks labels were not touched in this step.
+
+### How to test it
+
+Run pytest -q — 6 passed (3 briefing + 3 categorize). Run python propose_categories.py — on Nov 22 it showed Daily Dose and Chrisnotes as Important, Carnival and Algo Monster as Promotions, the rest as Updates. Run python list_labels.py | grep Applications — after cleaning, only the parent Applications label remains, plus all Job Applications labels.
+
+### What changed, and when
+
+See CHANGELOG.md — 2026-11-22, Phase 2: added categorize.py, propose_categories.py, list_labels.py, clean_applications_labels.py, test_categorize.py; added gmail.modify to auth.py; deleted 5 Applications sub-labels.

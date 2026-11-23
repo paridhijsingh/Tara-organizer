@@ -91,3 +91,10 @@ Format for every entry: **Date**, **What**, **Why**, **When**, **Log**.
 - **Why:** Phase 1 was a terminal command; Phase 2 makes Tara message Paridhi each morning.
 - **When:** Nov 22, 2026.
 - **Log:** Test email landed Nov 22 at 4:07 PM, correct briefing inside. crontab -l confirms the 8am schedule. Filter v4: AlgoMonster is noise, excluded. Text messages are later, not yet built.
+
+## 2026-11-22 — Phase 2: Gmail categorizing and label cleaning, part 1
+
+- **What:** Added categorize.py (suggest_category: Promotions / Social / Updates / Important), propose_categories.py (read-only proposals), list_labels.py (read-only label list), clean_applications_labels.py (deletes 5 approved labels by ID), test_categorize.py (3 tests). Added gmail.modify to auth.py, re-authorized once.
+- **Why:** Gmail had ~200 labels; Tara proposes categories and helps decide which labels to combine and clean, with Paridhi approving each batch.
+- **When:** Nov 22, 2026.
+- **Log:** pytest -q: 6 passed. Live propose run: Daily Dose + Chrisnotes Important, Carnival + Algo Monster Promotions. Deleted, approved: Applications/FAFSA, Applications/Santa Barbara, Applications/Indian Universities, Applications/CSS Profile, Applications/University of California. Parent Applications kept, mail never deleted, Job Applications and Substacks untouched.
