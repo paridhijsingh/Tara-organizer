@@ -137,3 +137,32 @@ Run python main.py live — on Nov 22 it printed no events, one important mail (
 ### What changed, and when
 
 See CHANGELOG.md — 2026-11-22, Step 3: deadlines.py, briefing.py, main.py, test_briefing.py added; Gmail filter v3.
+
+## Chapter 5 — Morning message by email
+
+### What it is
+
+send_briefing.py — sends Tara's morning briefing by email to Paridhi, every morning at 8am.
+
+### Why it exists
+
+Phase 1 was a terminal command — you had to run Tara yourself. Phase 2 makes Tara message you, so the briefing arrives without you running anything.
+
+### How it works
+
+1. Input: the same three pieces as the briefing — events, important mail, deadlines.
+2. Steps: send_briefing.py builds the briefing with build_briefing(), makes an email to paridhijaysingh@gmail.com with subject "Tara — your morning briefing", and sends it with the Gmail API.
+3. Schedule: a cron job on Paridhi's Mac — 0 8 \* \* \* — runs send_briefing.py at 8am every day, and logs to tara.log.
+4. Output: An email in her inbox, from herself, with the briefing inside.
+
+### What it does NOT do
+
+Sends ONLY to paridhijaysingh@gmail.com, never to anyone else. It never sends on its own without the schedule, and it never changes the briefing — it sends the same text main.py prints. Text messages are later, not yet built.
+
+### How to test it
+
+Run python send_briefing.py by hand once — on Nov 22 it landed in the inbox at 4:07 PM, with the right calendar, Chrisnotes, and deadlines. Run crontab -l to check the schedule is saved.
+
+### What changed, and when
+
+See CHANGELOG.md — 2026-11-22, Phase 2: added gmail.send to auth.py scopes, re-authorized once, added send_briefing.py, added the 8am cron job. Filter v4 excluded AlgoMonster ("black friday", "blowout", "% off", "algo monster").

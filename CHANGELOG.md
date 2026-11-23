@@ -84,3 +84,10 @@ Format for every entry: **Date**, **What**, **Why**, **When**, **Log**.
 - **Why:** The briefing is Tara's one job in Phase 1 — calendar + important Gmail + deadlines in one morning message.
 - **When:** Nov 22, 2026.
 - **Log:** Live run printed no events, 1 important mail (Chrisnotes), 3 deadlines. First run had 2 false positives (MJH job alert, Carnival sale) — filter v3 added "must hire", "myjobhelper", "cyber sale", "early access", "carnival" to EXCLUDE_WORDS, Chrisnotes kept on purpose. pytest -q: 3 passed.
+
+## 2026-11-22 — Phase 2: Morning message by email
+
+- **What:** Added send_briefing.py (emails the briefing to paridhijaysingh@gmail.com only), added gmail.send to auth.py, re-authorized once, scheduled it with cron at 8am daily (0 8 \* \* \*), logging to tara.log.
+- **Why:** Phase 1 was a terminal command; Phase 2 makes Tara message Paridhi each morning.
+- **When:** Nov 22, 2026.
+- **Log:** Test email landed Nov 22 at 4:07 PM, correct briefing inside. crontab -l confirms the 8am schedule. Filter v4: AlgoMonster is noise, excluded. Text messages are later, not yet built.

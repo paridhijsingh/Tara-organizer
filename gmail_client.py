@@ -8,8 +8,7 @@ IMPORTANT_WORDS = [
     "substack", "tldr", "tech",
 ]
 
-EXCLUDE_WORDS = ["job alert", "applications needed", "hiring now", "position is vacant", "job feed", "warehouse associate", "must hire", "myjobhelper", "cyber sale", "early access", "carnival"]
-
+EXCLUDE_WORDS = ["job alert", "applications needed", "hiring now", "position is vacant", "job feed", "warehouse associate", "must hire", "myjobhelper", "cyber sale", "early access", "carnival", "black friday", "blowout", "% off", "algo monster"]
 
 
 def is_important(email):
