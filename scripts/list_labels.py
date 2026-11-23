@@ -2,6 +2,10 @@
 # Usage: python list_labels.py
 # Changes nothing. Paridhi decides which labels to combine / clean.
 
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
+
 from googleapiclient.discovery import build
 
 from auth import get_credentials

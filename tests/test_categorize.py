@@ -1,5 +1,9 @@
 # test_categorize.py — Tests for suggest_category, with fake data only.
 
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
+
 from categorize import suggest_category
 
 

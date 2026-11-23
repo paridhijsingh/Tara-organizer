@@ -3,6 +3,10 @@
 # Keeps the parent label "Substacks". Mail stays under Substacks / All Mail.
 # Usage: python clean_substacks_labels.py
 
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
+
 from googleapiclient.discovery import build
 
 from auth import get_credentials

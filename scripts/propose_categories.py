@@ -2,6 +2,10 @@
 # Usage: python propose_categories.py
 # Moves nothing. Paridhi approves a batch first, then Tara moves it.
 
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
+
 from googleapiclient.discovery import build
 
 from auth import get_credentials

@@ -112,3 +112,10 @@ Format for every entry: **Date**, **What**, **Why**, **When**, **Log**.
 - **Why:** Paridhi has not been reading Substacks lately; 43 separate folders were not being used.
 - **When:** Nov 22, 2026.
 - **Log:** Deleted 43 sub-labels, verified with list_labels.py | grep Substacks — only Substacks (Label_81) remains. Mail never deleted.
+
+## 2026-11-22 — Repo reorganized into folders
+
+- **What:** Moved files into docs/ (PLAN, SKILL, RULES, CHANGELOG, MANUAL), src/ (auth, calendar, gmail, briefing, deadlines, categorize, main, send*briefing), scripts/ (propose, apply, list_labels, clean*\*), tests/ (test_briefing, test_categorize). Used git mv, fixed import paths, credentials.json / token.json stay at root.
+- **Why:** Repo root had loads of files; folders make it easier to find code, docs, scripts, and tests.
+- **When:** Nov 22, 2026.
+- **Log:** Verified: python src/main.py prints briefing, pytest tests/ -q: 6 passed, list_labels + propose_categories work from scripts/. Cron updated to src/send_briefing.py at 8am, old cron line deleted.

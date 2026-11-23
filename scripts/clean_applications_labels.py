@@ -3,6 +3,10 @@
 # Keeps the parent label "Applications".
 # Usage: python clean_applications_labels.py
 
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
+
 from googleapiclient.discovery import build
 
 from auth import get_credentials

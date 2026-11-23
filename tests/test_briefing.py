@@ -1,6 +1,10 @@
 # test_briefing.py — Tests for build_briefing, with fake data only.
 # No Google calls here.
 
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
+
 from briefing import build_briefing
 
 
