@@ -195,3 +195,7 @@ Run pytest -q — 6 passed (3 briefing + 3 categorize). Run python propose_categ
 ### What changed, and when
 
 See CHANGELOG.md — 2026-11-22, Phase 2: added categorize.py, propose_categories.py, list_labels.py, clean_applications_labels.py, test_categorize.py; added gmail.modify to auth.py; deleted 5 Applications sub-labels.
+
+Also, Nov 22: apply_categories.py added — applies the suggested Promotions / Social / Updates label to approved mail only, leaves Important mail alone, never deletes, archives, or marks mail as read. First approved batch moved 8 mails, left 2 Important alone.
+
+Also, Nov 22: clean_substacks_labels.py added — deletes all Substacks/<name> sub-labels by name prefix, keeps the parent Substacks label. Deleted 43 sub-labels, mail never deleted. Paridhi has not been reading Substacks lately, so they were collapsed into the parent; a per-newsletter label can be made again later if she resumes reading one.

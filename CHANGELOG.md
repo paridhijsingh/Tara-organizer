@@ -105,3 +105,10 @@ Format for every entry: **Date**, **What**, **Why**, **When**, **Log**.
 - **Why:** Tara proposes first, Paridhi approves, then Tara moves only the approved mail.
 - **When:** Nov 22, 2026.
 - **Log:** Moved 8: Carnival + Algo Monster to Promotions; OpenRouter, Chris Ching, Apollo, WallStreetQuants, CareerCircle, MJH to Updates. Left alone: Daily Dose + Chrisnotes (Important). Nothing deleted, archived, or marked read.
+
+## 2026-11-22 — Phase 2: Substacks labels collapsed
+
+- **What:** Added clean_substacks_labels.py. Deleted all Substacks/<name> sub-labels, kept parent Substacks.
+- **Why:** Paridhi has not been reading Substacks lately; 43 separate folders were not being used.
+- **When:** Nov 22, 2026.
+- **Log:** Deleted 43 sub-labels, verified with list_labels.py | grep Substacks — only Substacks (Label_81) remains. Mail never deleted.
