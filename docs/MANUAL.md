@@ -298,3 +298,31 @@ Run pytest tests/ -q — 15 passed (12 old + 3 suspicious). Run python3 scripts/
 ### What changed, and when
 
 See CHANGELOG.md — 2026-11-25: added suspicious.py, propose_suspicious.py, test_suspicious.py; added Spam folder check; narrowed the phrase list after Paridhi corrected four false positives; added Elytespark rule.
+
+## Chapter 10 — Drive storage check
+
+### What it is
+
+drive_client.py checks how full Google Drive is and lists the largest files Tara can see. check_drive.py prints the report. check_gmail_size.py lists the largest Gmail messages with attachments. clean_drive.py trashes one approved file at a time.
+
+### Why it exists
+
+Tara checks Drive storage, reports how full it is, flags large / duplicate / old files, and proposes cleanup — Paridhi approves each delete / move, never delete automatically.
+
+### How it works
+
+1. Input: Drive API, read-only scope drive.metadata.readonly for listing, plus drive scope for trashing an approved file.
+2. Steps: get_storage() returns used / limit / percent and the quota breakdown. get_largest_files() lists the 10 largest files, with owner. check_drive.py prints storage + largest files. check_gmail_size.py lists Gmail messages with attachments over 5 MB.
+3. Output: a storage report, with a breakdown by Drive / Gmail / Photos from Google One.
+
+### What it does NOT do
+
+Never deletes a file without Paridhi approving that exact file first. Never deletes a shared file Tara / Paridhi does not own — only the owner can trash it, Tara gets a 403. Never assumes Drive is where the space is — the quota breakdown decides that.
+
+### How to test it
+
+Run python3 scripts/check_drive.py — on Nov 25 it showed 12.4 GB used of 15.0 GB (82.7% full), usageInDrive only 44.7 MB, usageInDriveTrash 0. Run python3 scripts/check_gmail_size.py — only 4 messages over 5 MB, ~50 MB total, all from Chiamaka Ikeh / IBM SkillsBuild.
+
+### What changed, and when
+
+See CHANGELOG.md — 2026-11-25: added drive_client.py, check_drive.py, check_gmail_size.py, clean_drive.py; enabled Google Drive API; added drive.metadata.readonly + drive scopes; found the real usage is Photos, not Drive.

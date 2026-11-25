@@ -173,3 +173,10 @@ Format for every entry: **Date**, **What**, **Why**, **When**, **Log**.
 - **Why:** Tara flags suspicious mail for Paridhi to review first, never auto-spams; also checks Spam for real mail Gmail caught by mistake.
 - **When:** Nov 25, 2026.
 - **Log:** pytest tests/ -q: 15 passed. First propose run: 0 suspicious out of 20 unread. Spam: 6 mails — Oracle NetSuite x4, Link Terms of Service, IBM Partner / Elytespark. Elytespark link (elytespark.in) is a paid SETIP training program with a program fee, not an IBM internship — do NOT apply or pay; left in Spam. Phrase list narrowed after Paridhi's corrections: "verify your account", "update your payment", "your account will be closed", and "urgent action required" are NOT suspicious on their own.
+
+## 2026-11-25 — Phase 2: Drive storage check
+
+- **What:** Added src/drive_client.py, scripts/check_drive.py, scripts/check_gmail_size.py, scripts/clean_drive.py. Enabled Google Drive API in tara-organizer project; scopes now 6 total, incl. drive.metadata.readonly + drive.
+- **Why:** Tara checks Drive storage and proposes cleanup, approval per file.
+- **When:** Nov 25, 2026.
+- **Log:** Drive 12.4 GB used of 15.0 GB (82.7% full), but usageInDrive only 44.7 MB. Largest files are all shared, not owned — SoCal video 4.7 GB owned by jlp, cannot trash (403 insufficient permissions, Paridhi cannot delete it in Drive either). Owned largest files are only 11.3 MB / 11.0 MB / 5.0 MB, with duplicates Histograms and Resampling.pdf x2 and What is Data Science\_.pdf x2 (2.6 MB total). Gmail attachments over 5 MB: 4 messages, ~50 MB total. Google One split (Nov 25): Drive 0.04 GB, Gmail 2.96 GB, Google Photos 9.4 GB — Photos is the real usage, cleanup is in Photos, not Drive.
