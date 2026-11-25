@@ -158,3 +158,10 @@ Format for every entry: **Date**, **What**, **Why**, **When**, **Log**.
 - **Why:** Job Applications mail had no status; Tara sorts Active / Not moving forward / Inactive, with a summary report.
 - **When:** Nov 25, 2026.
 - **Log:** pytest tests/ -q: 11 passed. First propose run (subject only): Active 10, Unsure 10, 0 rejections found. Body-read run: Active 9, Not moving forward 4, Unsure 7. Approved batch applied: 4 trashed (Vagaro, Amex x3), 9 filed Active, 7 left alone. Summary report emailed Nov 25 10:28 AM.
+
+## 2026-11-25 — Phase 2: Unsubscribe from job-alert senders
+
+- **What:** Added scripts/find_unsubscribe.py (read-only, prints List-Unsubscribe links).
+- **Why:** Paridhi asked to unsubscribe from MJH, CareerConnects, US Navy, and other weird job boards sending unrelated positions.
+- **When:** Nov 25, 2026.
+- **Log:** find_unsubscribe.py found links for MJH and CareerConnects (3 mails each, same token per sender). Paridhi clicked one link per sender and confirmed unsubscribe. US Navy / Veterans Affairs alerts came via CareerConnects, so they stop with that unsubscribe.

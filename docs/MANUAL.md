@@ -242,3 +242,31 @@ Run pytest tests/ -q — 11 passed (6 old + 5 job_status). Run python3 scripts/p
 ### What changed, and when
 
 See CHANGELOG.md — 2026-11-25: added job_status.py, propose_job_status.py, apply_job_status.py, test_job_status.py; fixed parent-label bug (sub-labels don't carry the parent label) and Intern-at-end-of-subject bug.
+
+## Chapter 8 — Unsubscribe from irrelevant signups
+
+### What it is
+
+find_unsubscribe.py finds the unsubscribe link for a sender Tara is asked to unsubscribe from, from the List-Unsubscribe header of their recent mail. Paridhi clicks the link in her browser and confirms on the page.
+
+### Why it exists
+
+Job-alert senders (MJH, CareerConnects, and others) send unrelated positions and clutter Job Applications mail. Unsubscribing stops new mail from them, without deleting old mail.
+
+### How it works
+
+1. Input: a sender list in scripts/find_unsubscribe.py, approved by Paridhi first.
+2. Steps: Tara lists up to 3 recent mails from each sender, reads the List-Unsubscribe header, and prints the link. One link per sender is enough — the link is tied to Paridhi's email address, not to one campaign.
+3. Output: the unsubscribe links, printed in the terminal. Paridhi clicks one per sender and confirms on the page.
+
+### What it does NOT do
+
+Never unsubscribes from Substacks / TLDR / tech newsletters Paridhi wants, or from companies she applies to. Never unsubscribes automatically — Tara only finds the link, Paridhi clicks it. Never deletes old mail from that sender.
+
+### How to test it
+
+Run python3 scripts/find_unsubscribe.py — on Nov 25 it found links for MJH (myjobhelper.com/unsub) and CareerConnects (careerconnects.com/unsub), 3 mails each.
+
+### What changed, and when
+
+See CHANGELOG.md — 2026-11-25: added find_unsubscribe.py; unsubscribed from MJH and CareerConnects (US Navy / Veterans Affairs alerts came via CareerConnects, so they stop with it).
