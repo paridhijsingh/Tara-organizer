@@ -326,3 +326,31 @@ Run python3 scripts/check_drive.py — on Nov 25 it showed 12.4 GB used of 15.0 
 ### What changed, and when
 
 See CHANGELOG.md — 2026-11-25: added drive_client.py, check_drive.py, check_gmail_size.py, clean_drive.py; enabled Google Drive API; added drive.metadata.readonly + drive scopes; found the real usage is Photos, not Drive.
+
+## Chapter 11 — Bookmarks organizing
+
+### What it is
+
+list_bookmarks.py lists Chrome bookmark folders and counts. find_duplicate_bookmarks.py finds duplicate URLs. check_dead_bookmarks.py checks which URLs no longer load. clean_bookmarks.py deletes approved dead URLs only.
+
+### Why it exists
+
+Tara organizes bookmark tabs — list, propose folders, merge duplicates, flag dead links, approve each move, never lose a bookmark.
+
+### How it works
+
+1. Input: Chrome Bookmarks file on Paridhi's Mac, Profile 1 — NOT Default. Default had only 12 bookmarks; Profile 1 has 336 unique URLs, 31 folders.
+2. Steps: list folders + counts, find duplicates by exact URL, check dead links with a HEAD request, delete only approved URLs by exact match, with a .bak backup first.
+3. Output: a folder list, a duplicate list, a dead-link list, and a delete report.
+
+### What it does NOT do
+
+Never deletes a bookmark without Paridhi approving that exact URL first. Never edits Bookmarks while Chrome is open — Chrome rewrites the file on exit, so close Chrome first. Never treats a 403 / 405 / 401 as dead — those sites block HEAD requests but load fine in Chrome.
+
+### How to test it
+
+Run python3 scripts/list_bookmarks.py — on Nov 25, Profile 1: ML 166, AI Hacks 130, Advocacy 92, Internship Hacks 82, Bookmarks Bar 48. Run python3 scripts/find_duplicate_bookmarks.py — 0 duplicate URLs, 336 unique. Run python3 scripts/check_dead_bookmarks.py — 83 flagged, most 403/405 false positives, 13 truly dead (404 / DNS).
+
+### What changed, and when
+
+See CHANGELOG.md — 2026-11-25: added list_bookmarks.py, find_duplicate_bookmarks.py, check_dead_bookmarks.py, clean_bookmarks.py; fixed Profile 1 (not Default); fixed SSL cert verification; deleted 13 dead bookmarks.

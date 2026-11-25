@@ -180,3 +180,10 @@ Format for every entry: **Date**, **What**, **Why**, **When**, **Log**.
 - **Why:** Tara checks Drive storage and proposes cleanup, approval per file.
 - **When:** Nov 25, 2026.
 - **Log:** Drive 12.4 GB used of 15.0 GB (82.7% full), but usageInDrive only 44.7 MB. Largest files are all shared, not owned — SoCal video 4.7 GB owned by jlp, cannot trash (403 insufficient permissions, Paridhi cannot delete it in Drive either). Owned largest files are only 11.3 MB / 11.0 MB / 5.0 MB, with duplicates Histograms and Resampling.pdf x2 and What is Data Science\_.pdf x2 (2.6 MB total). Gmail attachments over 5 MB: 4 messages, ~50 MB total. Google One split (Nov 25): Drive 0.04 GB, Gmail 2.96 GB, Google Photos 9.4 GB — Photos is the real usage, cleanup is in Photos, not Drive.
+
+## 2026-11-25 — Phase 2: Bookmarks organizing
+
+- **What:** Added scripts/list_bookmarks.py, find_duplicate_bookmarks.py, check_dead_bookmarks.py, clean_bookmarks.py.
+- **Why:** Tara organizes bookmarks — list, propose, merge duplicates, flag dead links, approve each move, never lose a bookmark.
+- **When:** Nov 25, 2026.
+- **Log:** Chrome Default profile was wrong (12 bookmarks) — real profile is Profile 1, 336 unique URLs, 31 folders: ML 166, AI Hacks 130, Advocacy 92, Internship Hacks 82. Duplicates: 0. Dead-link check first run was all SSL CERTIFICATE_VERIFY_FAILED (Python on Mac, not dead links) — fixed with ssl.\_create_unverified_context. Second run: 83 flagged, most 403/405/401 false positives (sites block HEAD). Deleted 13 approved dead URLs only (404 / DNS): Hulu, UCSB Degree Requirements, Wolf Song, Extempore, GenVi dev-tools x3, UCLA SPUR, Builder.io, Pastel Replit, LlamaIndex job, PSTAT 134 JupyterLab, Intel Developer Cloud. Backup Bookmarks.bak created, Chrome closed first.
