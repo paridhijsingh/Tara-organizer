@@ -270,3 +270,31 @@ Run python3 scripts/find_unsubscribe.py — on Nov 25 it found links for MJH (my
 ### What changed, and when
 
 See CHANGELOG.md — 2026-11-25: added find_unsubscribe.py; unsubscribed from MJH and CareerConnects (US Navy / Veterans Affairs alerts came via CareerConnects, so they stop with it).
+
+## Chapter 9 — Suspicious mail, with review + Spam folder check
+
+### What it is
+
+suspicious.py flags mail that looks like a scam, using a tight phrase list plus a known-bad sender check. propose_suspicious.py lists up to 20 unread mails as SUSPICIOUS or OK, then lists up to 10 mails already in Spam.
+
+### Why it exists
+
+Tara flags suspicious mail for Paridhi to review herself first, and only files to Spam after she approves. She also checks Spam, because Gmail can put real mail there by mistake.
+
+### How it works
+
+1. Input: recent unread mail, plus mail in the Spam label.
+2. Steps: is_suspicious() checks sender + subject + snippet for "confirm your password", "click here to claim", "you have won", "program fee is applicable", "placement assured", or sender elytespark.com. propose_suspicious.py prints [SUSPICIOUS] / [OK] for each unread mail, then [SPAM] for each mail in Spam.
+3. Output: a summary count, and a Spam list for Paridhi to review.
+
+### What it does NOT do
+
+Never files to Spam automatically — Paridhi reviews and approves first. Never flags "verify your account", "update your payment", "your account will be closed", or "urgent action required" on their own — those can all be legit (company verification, a failed subscription payment, a trial expiring, an urgent mail from a boss / NDA). Never rescues mail from Spam without Paridhi saying so.
+
+### How to test it
+
+Run pytest tests/ -q — 15 passed (12 old + 3 suspicious). Run python3 scripts/propose_suspicious.py — on Nov 25 it showed 0 suspicious out of 20 unread, and 6 in Spam: Oracle NetSuite x4 (correctly Spam), Link Terms of Service, and IBM Partner / Elytespark internship (not legit — see below).
+
+### What changed, and when
+
+See CHANGELOG.md — 2026-11-25: added suspicious.py, propose_suspicious.py, test_suspicious.py; added Spam folder check; narrowed the phrase list after Paridhi corrected four false positives; added Elytespark rule.

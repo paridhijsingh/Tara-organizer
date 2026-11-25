@@ -166,3 +166,10 @@ Format for every entry: **Date**, **What**, **Why**, **When**, **Log**.
 - **When:** Nov 25, 2026.
 - **Log:** find_unsubscribe.py found links for MJH and CareerConnects (3 mails each, same token per sender). Paridhi clicked one link per sender and confirmed unsubscribe. US Navy / Veterans Affairs alerts came via CareerConnects, so they stop with that unsubscribe.
 - Batch 2, Nov 25: Jobsora unsubscribed via Gmail's Unsubscribe button (pasted list-unsubscribe link gave 405 Method Not Allowed — Gmail's button works, pasted link does not). CareerCircle is KEEP — Paridhi said Nov 25 it is important, do NOT unsubscribe; commented out of find_unsubscribe.py. WallStreetQuants: 0 recent mail, nothing to do.
+
+## 2026-11-25 — Phase 2: Suspicious mail, with review + Spam check
+
+- **What:** Added src/suspicious.py, scripts/propose_suspicious.py (unread + Spam check), tests/test_suspicious.py (3 tests).
+- **Why:** Tara flags suspicious mail for Paridhi to review first, never auto-spams; also checks Spam for real mail Gmail caught by mistake.
+- **When:** Nov 25, 2026.
+- **Log:** pytest tests/ -q: 15 passed. First propose run: 0 suspicious out of 20 unread. Spam: 6 mails — Oracle NetSuite x4, Link Terms of Service, IBM Partner / Elytespark. Elytespark link (elytespark.in) is a paid SETIP training program with a program fee, not an IBM internship — do NOT apply or pay; left in Spam. Phrase list narrowed after Paridhi's corrections: "verify your account", "update your payment", "your account will be closed", and "urgent action required" are NOT suspicious on their own.
