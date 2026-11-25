@@ -127,7 +127,7 @@ Format for every entry: **Date**, **What**, **Why**, **When**, **Log**.
 ### 2026-11-22 — Repo reorganized into folders
 
 - **Date:** 2026-11-22
-- **What:** Moved files into `docs/` (PLAN, SKILL, RULES, CHANGELOG, MANUAL), `src/` (auth, calendar, gmail, briefing, deadlines, categorize, main, send_briefing), `scripts/` (propose, apply, list_labels, clean_*), `tests/` (test_briefing, test_categorize). Used `git mv`, fixed import paths, `credentials.json` / `token.json` stay at root
+- **What:** Moved files into `docs/` (PLAN, SKILL, RULES, CHANGELOG, MANUAL), `src/` (auth, calendar, gmail, briefing, deadlines, categorize, main, send*briefing), `scripts/` (propose, apply, list_labels, clean*\*), `tests/` (test_briefing, test_categorize). Used `git mv`, fixed import paths, `credentials.json` / `token.json` stay at root
 - **Why:** Repo root had loads of files; folders make it easier to find code, docs, scripts, and tests
 - **When:** Phase 2
 - **Log:** Verified: `python src/main.py` prints briefing, `pytest tests/ -q`: 6 passed, `list_labels` + `propose_categories` work from `scripts/`. Cron updated to `src/send_briefing.py` at 8am, old cron line deleted
@@ -151,3 +151,10 @@ Format for every entry: **Date**, **What**, **Why**, **When**, **Log**.
 - **Why:** Close the last small gaps so the README matches live setup
 - **When:** Phase 2
 - **Log:** Docs only — no feature code changed
+
+## 2026-11-25 — Phase 2: Job Applications status sorting
+
+- **What:** Added src/job_status.py (status + Full-time / Intern type), scripts/propose_job_status.py (read-only, full body), scripts/apply_job_status.py (trash Not moving forward, file Active / Inactive, email summary report), tests/test_job_status.py (5 tests).
+- **Why:** Job Applications mail had no status; Tara sorts Active / Not moving forward / Inactive, with a summary report.
+- **When:** Nov 25, 2026.
+- **Log:** pytest tests/ -q: 11 passed. First propose run (subject only): Active 10, Unsure 10, 0 rejections found. Body-read run: Active 9, Not moving forward 4, Unsure 7. Approved batch applied: 4 trashed (Vagaro, Amex x3), 9 filed Active, 7 left alone. Summary report emailed Nov 25 10:28 AM.

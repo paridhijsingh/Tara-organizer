@@ -208,7 +208,37 @@ Proposing moves nothing. Deleting a label never deletes mail — mail stays in A
 ### What changed, and when
 
 See [CHANGELOG.md](CHANGELOG.md) — **2026-11-22, Phase 2:**
+
 - Added `categorize.py`, `propose_categories.py`, `list_labels.py`, `clean_applications_labels.py`, `test_categorize.py`; added `gmail.modify`; deleted 5 Applications sub-labels.
 - Added `apply_categories.py` — first approved batch moved 8 mails, left 2 Important alone.
 - Added `clean_substacks_labels.py` — deleted 43 Substacks sub-labels; parent kept.
 - Files now live under `src/` and `scripts/` after the folder reorg.
+
+## Chapter 7 — Job Applications status sorting
+
+### What it is
+
+job_status.py classifies a Job Applications email by status (Active / Not moving forward / Inactive / Unsure) and by type (Full-time / Intern / not stated). propose_job_status.py shows those for up to 20 mails. apply_job_status.py files the approved batch and emails a summary report.
+
+### Why it exists
+
+Job Applications mail was ~150 company labels with no status — Tara reads the mail and tells you which applications are still active, which are not moving forward, and which jobs expired, so you can focus on the active ones.
+
+### How it works
+
+1. Input: mail under Job Applications and all its sub-labels, full body read, not just subject/snippet.
+2. Steps: classify_job_email() checks rejection phrases first, then expired phrases, then active phrases. classify_job_type() checks "intern" then "full-time". propose_job_status.py prints [Status | Type] sender: subject + a summary count.
+3. Apply: apply_job_status.py trashes Not moving forward mail (recoverable 30 days), files Active under Job Applications/Active, Inactive under Job Applications/Inactive, leaves Unsure alone, then emails a summary report to paridhijaysingh@gmail.com.
+4. Output: A summary email with Moved to Trash / Filed Active / Filed Inactive / Left alone lists.
+
+### What it does NOT do
+
+Never permanently deletes mail — Trash only, recoverable 30 days. Never files Unsure mail without Paridhi checking it first. Never guesses a status from the subject alone — it reads the body.
+
+### How to test it
+
+Run pytest tests/ -q — 11 passed (6 old + 5 job_status). Run python3 scripts/propose_job_status.py — on Nov 25 it showed Active 9, Not moving forward 4, Unsure 7, Inactive 0, with Full-time / Intern tags. Run python3 scripts/apply_job_status.py — summary report landed Nov 25 at 10:28 AM, with the same counts.
+
+### What changed, and when
+
+See CHANGELOG.md — 2026-11-25: added job_status.py, propose_job_status.py, apply_job_status.py, test_job_status.py; fixed parent-label bug (sub-labels don't carry the parent label) and Intern-at-end-of-subject bug.
