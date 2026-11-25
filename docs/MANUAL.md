@@ -354,3 +354,31 @@ Run python3 scripts/list_bookmarks.py — on Nov 25, Profile 1: ML 166, AI Hacks
 ### What changed, and when
 
 See CHANGELOG.md — 2026-11-25: added list_bookmarks.py, find_duplicate_bookmarks.py, check_dead_bookmarks.py, clean_bookmarks.py; fixed Profile 1 (not Default); fixed SSL cert verification; deleted 13 dead bookmarks.
+
+## Chapter 12 — Desktop tidy
+
+### What it is
+
+list_desktop.py lists files on the Desktop, biggest first, with size and date. tidy_desktop.py moves approved groups into folders, and moves approved deletes to Trash.
+
+### Why it exists
+
+Tara tidies the desktop — suggestions and assist only, Paridhi approves each move, never moves or deletes automatically.
+
+### How it works
+
+1. Input: ~/Desktop on Paridhi's Mac, read with pathlib, no API, no scope.
+2. Steps: list_desktop.py prints file count, size, date. tidy_desktop.py creates Desktop/Screenshots/ and Desktop/Screen Recordings/, moves Screenshot* / Simulator Screenshot* there, moves Screen Recording* there, moves the approved Cursor .dmg + ~$*.docx lock files to ~/.Trash.
+3. Output: a move report, and a new list_desktop.py run to verify.
+
+### What it does NOT do
+
+Never moves or deletes a file Paridhi did not approve by group. Never deletes permanently — deletes go to Trash, recoverable. Never touches PDFs, zips, or the resume unless she names them.
+
+### How to test it
+
+Run python3 scripts/list_desktop.py — on Nov 25 before: 73 files, 799.3 MB. Run python3 scripts/tidy_desktop.py, then list again — after: 19 files, 91.3 MB, 39 screenshots moved, 8 recordings moved, 7 files to Trash.
+
+### What changed, and when
+
+See CHANGELOG.md — 2026-11-25: added list_desktop.py, tidy_desktop.py; Desktop 73 files / 799.3 MB -> 19 files / 91.3 MB.

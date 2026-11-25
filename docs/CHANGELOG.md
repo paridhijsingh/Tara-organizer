@@ -187,3 +187,10 @@ Format for every entry: **Date**, **What**, **Why**, **When**, **Log**.
 - **Why:** Tara organizes bookmarks — list, propose, merge duplicates, flag dead links, approve each move, never lose a bookmark.
 - **When:** Nov 25, 2026.
 - **Log:** Chrome Default profile was wrong (12 bookmarks) — real profile is Profile 1, 336 unique URLs, 31 folders: ML 166, AI Hacks 130, Advocacy 92, Internship Hacks 82. Duplicates: 0. Dead-link check first run was all SSL CERTIFICATE_VERIFY_FAILED (Python on Mac, not dead links) — fixed with ssl.\_create_unverified_context. Second run: 83 flagged, most 403/405/401 false positives (sites block HEAD). Deleted 13 approved dead URLs only (404 / DNS): Hulu, UCSB Degree Requirements, Wolf Song, Extempore, GenVi dev-tools x3, UCLA SPUR, Builder.io, Pastel Replit, LlamaIndex job, PSTAT 134 JupyterLab, Intel Developer Cloud. Backup Bookmarks.bak created, Chrome closed first.
+
+## 2026-11-25 — Phase 2: Desktop tidy
+
+- **What:** Added scripts/list_desktop.py, tidy_desktop.py.
+- **Why:** Tara tidies the desktop — suggestions and assist only, approval per move.
+- **When:** Nov 25, 2026.
+- **Log:** Desktop before: 73 files, 799.3 MB — Cursor .dmg 238.6 MB, screen recordings 424 MB total, Cracking the Coding Interview PDF 53.8 MB, IMDB zip 25.7 MB, ~30 screenshots. Approved groups: screenshots -> Desktop/Screenshots/ (39 moved), screen recordings -> Desktop/Screen Recordings/ (8 moved), Cursor .dmg + 6 Word lock files -> Trash (7 moved). After: 19 files, 91.3 MB. PDFs, zips, resume left alone as agreed.
