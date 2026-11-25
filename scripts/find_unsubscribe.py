@@ -12,8 +12,11 @@ from auth import get_credentials
 
 # Senders Paridhi asked to unsubscribe from, Nov 25, 2026
 SENDERS = [
-    "info@alerts.myjobhelper.com",      # MJH / MyJobHelper
-    "info@match.careerconnects.com",    # CareerConnects (incl. US Navy / Veterans Affairs alerts)
+    "info@alerts.myjobhelper.com",      # MJH / MyJobHelper — DONE Nov 25
+    "info@match.careerconnects.com",    # CareerConnects — DONE Nov 25
+    "jobsora.com",                      # Jobsora
+    # "careercircle.com",  # KEEP — Paridhi said Nov 25 CareerCircle is important, do NOT unsubscribe
+    "wallstreetquants.com",             # WallStreetQuants
 ]
 
 

@@ -165,3 +165,4 @@ Format for every entry: **Date**, **What**, **Why**, **When**, **Log**.
 - **Why:** Paridhi asked to unsubscribe from MJH, CareerConnects, US Navy, and other weird job boards sending unrelated positions.
 - **When:** Nov 25, 2026.
 - **Log:** find_unsubscribe.py found links for MJH and CareerConnects (3 mails each, same token per sender). Paridhi clicked one link per sender and confirmed unsubscribe. US Navy / Veterans Affairs alerts came via CareerConnects, so they stop with that unsubscribe.
+- Batch 2, Nov 25: Jobsora unsubscribed via Gmail's Unsubscribe button (pasted list-unsubscribe link gave 405 Method Not Allowed — Gmail's button works, pasted link does not). CareerCircle is KEEP — Paridhi said Nov 25 it is important, do NOT unsubscribe; commented out of find_unsubscribe.py. WallStreetQuants: 0 recent mail, nothing to do.
