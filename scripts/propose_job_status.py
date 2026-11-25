@@ -43,14 +43,31 @@ def main():
 
     seen_ids = set()
     messages = []
+    # Skip mail already filed by apply_job_status.py, so each run is a fresh batch
+    filed_label_names = {
+        "Job Applications/Active",
+        "Job Applications/Not moving forward",
+        "Job Applications/Inactive",
+    }
+    all_labels = {label["name"]: label["id"] for label in labels_result.get("labels", [])}
+    filed_ids = {all_labels[name] for name in filed_label_names if name in all_labels}
+
     for label_id in job_label_ids:
         result = service.users().messages().list(
-            userId="me", labelIds=[label_id], maxResults=20
+            userId="me", labelIds=[label_id], maxResults=50
         ).execute()
         for message in result.get("messages", []):
-            if message["id"] not in seen_ids:
-                seen_ids.add(message["id"])
-                messages.append(message)
+            if message["id"] in seen_ids:
+                continue
+            seen_ids.add(message["id"])
+            # messages().list does not return labelIds, so check the full message
+            full_labels = service.users().messages().get(
+                userId="me", id=message["id"], format="metadata",
+                metadataHeaders=["From"],
+            ).execute().get("labelIds", [])
+            if filed_ids.intersection(full_labels):
+                continue
+            messages.append(message)
         if len(messages) >= 20:
             break
 

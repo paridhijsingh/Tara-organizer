@@ -47,14 +47,29 @@ def main():
 
     seen_ids = set()
     messages = []
+    filed_label_names = {
+        "Job Applications/Active",
+        "Job Applications/Not moving forward",
+        "Job Applications/Inactive",
+    }
+    all_labels = {label["name"]: label["id"] for label in labels_result.get("labels", [])}
+    filed_ids = {all_labels[name] for name in filed_label_names if name in all_labels}
+
     for label_id in job_label_ids:
         result = service.users().messages().list(
-            userId="me", labelIds=[label_id], maxResults=20
+            userId="me", labelIds=[label_id], maxResults=50
         ).execute()
         for message in result.get("messages", []):
-            if message["id"] not in seen_ids:
-                seen_ids.add(message["id"])
-                messages.append(message)
+            if message["id"] in seen_ids:
+                continue
+            seen_ids.add(message["id"])
+            full_labels = service.users().messages().get(
+                userId="me", id=message["id"], format="metadata",
+                metadataHeaders=["From"],
+            ).execute().get("labelIds", [])
+            if filed_ids.intersection(full_labels):
+                continue
+            messages.append(message)
         if len(messages) >= 20:
             break
 
