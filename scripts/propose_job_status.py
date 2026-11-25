@@ -77,7 +77,7 @@ def main():
         print("No Job Applications mail found.")
         return
 
-    counts = {"Active": 0, "Not moving forward": 0, "Inactive": 0, "Unsure": 0}
+    counts = {"Active": 0, "Not moving forward": 0, "Inactive": 0, "Job alert": 0, "Unsure": 0}
 
     for message in messages:
         full = service.users().messages().get(

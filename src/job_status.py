@@ -35,6 +35,17 @@ INACTIVE_PHRASES = [
     "this position has been closed",
 ]
 
+JOB_ALERT_SENDERS = [
+    "myjobhelper.com",
+    "careerconnects.com",
+    "jobsora.com",
+]
+
+JOB_ALERT_PHRASES = [
+    "is interested in seeing your application",
+    "would like to get your application",
+    "help wanted",
+]
 
 def classify_job_email(text):
     """Return Active, Not moving forward, Inactive, or Unsure."""
@@ -45,6 +56,8 @@ def classify_job_email(text):
         return "Inactive"
     if any(phrase in text for phrase in ACTIVE_PHRASES):
         return "Active"
+    if any(sender in text for sender in JOB_ALERT_SENDERS) and any(phrase in text for phrase in JOB_ALERT_PHRASES):
+        return "Job alert"
     return "Unsure"
 
 

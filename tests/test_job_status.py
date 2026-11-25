@@ -24,3 +24,7 @@ def test_job_type():
     assert classify_job_type("Software Engineer Intern") == "Intern"
     assert classify_job_type("Full-Time Engineer") == "Full-time"
     assert classify_job_type("AI Engineer") == ""
+
+def test_job_alert():
+    assert classify_job_email("Robert Half IS INTERESTED in seeing your application, from info@match.careerconnects.com") == "Job alert"
+    assert classify_job_email("HELP WANTED: San Ramon, CA @Robert Half, from info@alerts.myjobhelper.com") == "Job alert"
